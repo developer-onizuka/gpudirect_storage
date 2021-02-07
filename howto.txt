@@ -4,11 +4,11 @@ But it is a little complicated, the followings might be helpful for you.
 
 1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
 
-2. Update all of softwares (200~400MB) after booting up Ubuntu.
+2. Check if the kernel version is 5.4.0-42-generic with "uname -r". If it's true, Update all of softwares (200~400MB). 
 
 3. Check iommu status. You should disable it.
    # dmesg | grep -i iommu
-   See the release note above url.
+   See the release note above URL.
    
 4. Install MOFED5.1 (MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz), but you might need to install "python3-distutils"
    # sudo apt-get install python3-distutils
@@ -48,7 +48,6 @@ But it is a little complicated, the followings might be helpful for you.
    # sudo apt-get -y install cuda
 
 8. Install GDS
-
    # sudo dpkg -i gpudirect-storage-local-repo-ubuntu2004-cuda-11.2-0.9.1_0.9.1-1_amd64.deb 
    # sudo apt-key add /var/gpudirect-storage-local-repo-*/7fa2af80.pub
    # sudo apt-get update
