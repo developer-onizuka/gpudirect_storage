@@ -1,7 +1,15 @@
-1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats"
+You can install GDS by through the release note below:
+https://docs.nvidia.com/gpudirect-storage/release-notes/index.html
+But it is a little complicated, the followings might be helpful for you.
 
-2. 
+1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
 
+2. Update all of softwares (200~400MB) after booting up Ubuntu.
+
+3. Installing MOFED5.1 (MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz), but you might need to install "python3-distutils"
+   # sudo apt-get install python3-distutils
+   # 
+   
 
 ~/nvidia$ sudo /usr/local/cuda-11.1/gds/tools/gdscheck -p
  GDS release version (beta): 0.9.0.18
