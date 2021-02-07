@@ -8,7 +8,7 @@ But it is a little complicated, the followings might be helpful for you.
 
 3. Check iommu status. You should disable it.
    # dmesg | grep -i iommu
-   See the release note above URL.
+   See the release note above URL. You need reboot after making disable iommu.
    
 4. Install MOFED5.1 (MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz), but you might need to install "python3-distutils"
    # sudo apt-get install python3-distutils
