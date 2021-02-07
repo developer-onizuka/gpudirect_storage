@@ -1,4 +1,6 @@
+1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats"
 
+2. 
 
 
 ~/nvidia$ sudo /usr/local/cuda-11.1/gds/tools/gdscheck -p
