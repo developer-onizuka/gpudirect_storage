@@ -1,6 +1,8 @@
-1. mount nvme as "ordered" mode.
+1. preparation about NVMe SSD
+   (1) mount nvme as "ordered" mode.
    # sudo mount -t ext4 -o data=ordered /dev/nvme0n1 /mnt
    
+   (2) Easy througput tests for read and write.
    <Read>
    $ time dd if=/mnt/testfile of=/dev/null bs=1024k iflag=direct
    8192+0 records in
@@ -26,7 +28,7 @@
    - Sequential Write (MB/s)	1,250MB/s
    See also the https://www.klevv.com/kjp/products_details/ssd/Klevv_Cras_C710_SSD.php.
    
-2. check if gds is ready by using gdsio_verify.
+2. Check if gds is ready by using gdsio_verify.
    $ gdsio_verify -d 0 -f /mnt/test -o 0 -s 1M -n 1 -m 0
    gpu index :0,file :/mnt/test, gpu buffer alignment :0, gpu buffer offset :0, gpu devptr offset :0, file offset :0, io_requested :1048576, io_chunk_size :1048576, bufregister :true, sync :0, nr ios :1, 
    fsync :0, 
@@ -58,7 +60,6 @@
     
     $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 1 -I 1 -T 10
     IoType: WRITE XferType: CPUONLY Threads: 1 DataSetSize: 10461184/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.983957 GiB/sec, Avg_Latency: 992.411609 usecs ops: 10216 total_time 10.139222 secs
-
 
 (2) Storage->CPU->GPU
     Bounce buffer occuring from GPU memory to NVMe and it was 0.95GB/s as you can see below:
