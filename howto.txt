@@ -2,6 +2,37 @@ You can install GDS by through the release note below:
 https://docs.nvidia.com/gpudirect-storage/release-notes/index.html
 But it is a little complicated, the followings might be helpful for you.
 
+0. Hardware
+   (1) Optiplex 3050SFF  ... JPY 19,250
+       Intel(R) Core(TM) i3-7100 CPU @ 3.90GHz
+       DDR4 DIMM 4GB
+       HDD 500GB
+       DVD DRIVE
+   (2) SATA SSD  ... JPY 2,000
+       Transcend SSD 120GB
+       P/N: TS120GSSD220S
+   (3) Wifi 11n ... JPY 800
+       P/N: WDC-150SU2MWH
+   (4) DDR4 DIMM 4GB ... JPY 2,280
+       Patriot Memory DDR4 2400MHz PC4-19200
+       P/N: PSD44F24082
+   (5) NVMe SSD ... JPY 3,980
+       KLEVV SSD 256GB CRAS C710 M.2 Type2280 PCIe3x4 NVMe 3D TLC NAND Flash
+       P/N: K256GM2SP0-C71
+   (6) ETC
+       -Sabrent 2.5in->3.5in ... JPY 599
+       -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
+       -GLOTRENDS M.2 Heatsink ... JPY 650
+   (7) NVIDIA Quadro P400 (GP107GL) ... JPT 5,948
+   ----- JPY 36,406 -----
+   
+   (8) For Windows10
+       -Crucial SSD P5 500GB M.2 NVMe (P/N: CT500P5SSD8JP) ... JPY 7,973
+       -Xiwai low profile PCI-e3.0 x1 M.2 NGFF M-Key SSD NVMe AHCI PCI Express Adapter Card ... JPY 999
+       -SanDisk 32GB USB3.1 Memory ... JPY 858
+       -Transcend SSD 120GB (P/N: TS120GSSD220S) ... JPY 2,500
+   ----- JPY 48,736 -----
+
 1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
 
 2. Check if the kernel version is 5.4.0-42-generic with "uname -r". If it's true, Update all of softwares (200~400MB). 
