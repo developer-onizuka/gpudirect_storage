@@ -27,7 +27,7 @@ But it is a little complicated, the followings might be helpful for you.
    (7) NVIDIA Quadro P400 (GP107GL) ... JPY 5,948
    ----- Total JPY 36,406 -----
    
-   (8) For Windows10
+   (8) For Windows10pro
        -Crucial SSD P5 500GB M.2 NVMe (P/N: CT500P5SSD8JP) ... JPY 7,973
        -Xiwai low profile PCI-e3.0 x1 M.2 NGFF M-Key SSD NVMe AHCI PCI Express Adapter Card ... JPY 999
        -SanDisk 32GB USB3.1 Memory ... JPY 858
