@@ -72,3 +72,30 @@
 
     $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 1 -T 10
     IoType: WRITE XferType: GPUD Threads: 1 DataSetSize: 10461184/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.973278 GiB/sec, Avg_Latency: 1003.289644 usecs ops: 10216 total_time 10.250480 secs
+    
+    
+5. Rand Read Throughput
+(1) Storage->CPU
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 2 -I 2 -T 10
+    IoType: RANDREAD XferType: CPU_GPU Threads: 1 DataSetSize: 10461184/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.949162 GiB/sec, Avg_Latency: 1028.752937 usecs ops: 10216 total_time 10.510911 secs
+    
+(2) Storage->CPU->GPU
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 1 -I 2 -T 10
+    IoType: RANDREAD XferType: CPUONLY Threads: 1 DataSetSize: 11509760/1048576(KiB) IOSize: 1024(KiB) Throughput: 1.084089 GiB/sec, Avg_Latency: 900.726157 usecs ops: 11240 total_time 10.125149 secs
+
+(3) Storage -> GPU (GDS)
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 2 -T 10
+IoType: RANDREAD XferType: GPUD Threads: 1 DataSetSize: 11509760/1048576(KiB) IOSize: 1024(KiB) Throughput: 1.090562 GiB/sec, Avg_Latency: 895.391459 usecs ops: 11240 total_time 10.065048 secs
+
+6. Rand Write Throughput
+(1) Storage->CPU
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 2 -I 3 -T 20
+IoType: RANDWRITE XferType: CPU_GPU Threads: 1 DataSetSize: 15704064/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.768765 GiB/sec, Avg_Latency: 1270.247783 usecs ops: 15336 total_time 19.481319 secs
+
+(2) Storage->CPU->GPU
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 1 -I 3 -T 20
+IoType: RANDWRITE XferType: CPUONLY Threads: 1 DataSetSize: 12582912/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.622306 GiB/sec, Avg_Latency: 1568.232747 usecs ops: 12288 total_time 19.283117 secs
+
+(3) Storage -> GPU (GDS)
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 3 -T 20
+IoType: RANDWRITE XferType: GPUD Threads: 1 DataSetSize: 19898368/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.918591 GiB/sec, Avg_Latency: 1063.049094 usecs ops: 19432 total_time 20.658341 secs
