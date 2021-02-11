@@ -6,8 +6,8 @@ But it is a little complicated, the followings might be helpful for you.
    (1) Optiplex 3050SFF  ... JPY 19,250
        Intel(R) Core(TM) i3-7100 CPU @ 3.90GHz
        DDR4 DIMM 4GB
-       HDD 500GB
-       DVD DRIVE
+       HDD 500GB  ---> remove
+       DVD DRIVE  ---> remove
    (2) SATA SSD  ... JPY 2,000
        Transcend SSD 120GB
        P/N: TS120GSSD220S
