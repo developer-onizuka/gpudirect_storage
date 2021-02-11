@@ -24,7 +24,7 @@ But it is a little complicated, the followings might be helpful for you.
        -Sabrent 2.5in->3.5in ... JPY 599
        -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
        -GLOTRENDS M.2 Heatsink ... JPY 650
-   (7) NVIDIA Quadro P400 (GP107GL) ... JPT 5,948
+   (7) NVIDIA Quadro P400 (GP107GL) ... JPY 5,948
    ----- Total JPY 36,406 -----
    
    (8) For Windows10
