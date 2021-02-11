@@ -31,7 +31,8 @@ But it is a little complicated, the followings might be helpful for you.
        -Xiwai low profile PCI-e3.0 x1 M.2 NGFF M-Key SSD NVMe AHCI PCI Express Adapter Card ... JPY 999
        -SanDisk 32GB USB3.1 Memory ... JPY 858
        -Transcend SSD 120GB (P/N: TS120GSSD220S) ... JPY 2,500
-   ----- JPY 48,736 -----
+       -GLOTRENDS M.2 Heatsink ... JPY 650
+   ----- JPY 49,386 -----
 
 1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
 
