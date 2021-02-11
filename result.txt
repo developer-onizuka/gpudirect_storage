@@ -1,8 +1,6 @@
 1. mount nvme as "ordered" mode.
    # sudo mount -t ext4 -o data=ordered /dev/nvme0n1 /mnt
    
-   As you know PCIe Gen3 x4 = 8GT/s*4*(128/130)/8 = 3.9GB/s, But it seems limited by NVMe itself. 
-   
    <Read>
    $ time dd if=/mnt/testfile of=/dev/null bs=1024k iflag=direct
    8192+0 records in
@@ -23,6 +21,10 @@
    user    0m0.043s
    sys     0m2.849s
    
+   As you know PCIe Gen3 x4 = 8GT/s*4*(128/130)/8 = 3.9GB/s, But it seems limited by NVMe itself. 
+   - Sequential Read (MB/s)	1,950MB/s
+   - Sequential Write (MB/s)	1,250MB/s
+   See also the https://www.klevv.com/kjp/products_details/ssd/Klevv_Cras_C710_SSD.php.
    
 2. check if gds is ready by using gdsio_verify.
    $ gdsio_verify -d 0 -f /mnt/test -o 0 -s 1M -n 1 -m 0
@@ -49,3 +51,23 @@
 
     $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 0 -T 10
     IoType: READ XferType: GPUD Threads: 1 DataSetSize: 14655488/1048576(KiB) IOSize: 1024(KiB) Throughput: 1.384300 GiB/sec, Avg_Latency: 705.381428 usecs ops: 14312 total_time 10.096484 secs
+
+4. Seq Write Throughput
+(1) Storage->CPU
+    0.98GB/s from NVMe to system memory.
+    
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 1 -I 1 -T 10
+    IoType: WRITE XferType: CPUONLY Threads: 1 DataSetSize: 10461184/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.983957 GiB/sec, Avg_Latency: 992.411609 usecs ops: 10216 total_time 10.139222 secs
+
+
+(2) Storage->CPU->GPU
+    Bounce buffer occuring from GPU memory to NVMe and it was 0.95GB/s as you can see below:
+    
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 2 -I 1 -T 10
+    IoType: WRITE XferType: CPU_GPU Threads: 1 DataSetSize: 9412608/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.958548 GiB/sec, Avg_Latency: 1018.719756 usecs ops: 9192 total_time 9.364754 secs
+
+(3) Storage -> GPU (GDS)
+    GDS eliminates bounce buffer so that it can write at 0.97GB/s.
+
+    $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 1 -T 10
+    IoType: WRITE XferType: GPUD Threads: 1 DataSetSize: 10461184/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.973278 GiB/sec, Avg_Latency: 1003.289644 usecs ops: 10216 total_time 10.250480 secs
