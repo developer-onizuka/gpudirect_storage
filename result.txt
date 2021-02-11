@@ -1,6 +1,29 @@
 1. mount nvme as "ordered" mode.
    # sudo mount -t ext4 -o data=ordered /dev/nvme0n1 /mnt
    
+   As you know PCIe Gen3 x4 = 8GT/s*4*(128/130)/8 = 3.9GB/s, But it seems limited by NVMe itself. 
+   
+   <Read>
+   $ time dd if=/mnt/testfile of=/dev/null bs=1024k iflag=direct
+   8192+0 records in
+   8192+0 records out
+   8589934592 bytes (8.6 GB, 8.0 GiB) copied, 5.22648 s, 1.6 GB/s
+
+   real    0m5.229s
+   user    0m0.043s
+   sys     0m1.273s
+
+   <Write>
+   $ time dd if=/dev/zero of=/mnt/testfile bs=1024k count=8192 oflag=direct
+   8192+0 records in
+   8192+0 records out
+   8589934592 bytes (8.6 GB, 8.0 GiB) copied, 10.6055 s, 810 MB/s
+
+   real    0m10.610s
+   user    0m0.043s
+   sys     0m2.849s
+   
+   
 2. check if gds is ready by using gdsio_verify.
    $ gdsio_verify -d 0 -f /mnt/test -o 0 -s 1M -n 1 -m 0
    gpu index :0,file :/mnt/test, gpu buffer alignment :0, gpu buffer offset :0, gpu devptr offset :0, file offset :0, io_requested :1048576, io_chunk_size :1048576, bufregister :true, sync :0, nr ios :1, 
@@ -10,7 +33,7 @@
 
 3. Seq Read Throughput
 (1) Storage->CPU
-    This value means that NVMe's seq-read throughput is 1.36GB/s which seems limited by NVMe itself. (PCIe Gen3 x4 = 8GT/s*4*(128/130)/8 = 3.9GB/s)
+    This value means that NVMe's seq-read throughput from NVMe to system memory is 1.36GB/s.
     
     $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 1 -I 0 -T 10
     IoType: READ XferType: CPUONLY Threads: 1 DataSetSize: 14655488/1048576(KiB) IOSize: 1024(KiB) Throughput: 1.368340 GiB/sec, Avg_Latency: 713.614380 usecs ops: 14312 total_time 10.214245 secs
