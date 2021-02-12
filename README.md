@@ -102,18 +102,13 @@ But it is a little complicated, the followings might be helpful for you.
    $ sudo apt-get -y install cuda
 
 # 8. Install GDS
+```
    $ sudo dpkg -i gpudirect-storage-local-repo-ubuntu2004-cuda-11.2-0.9.1_0.9.1-1_amd64.deb 
-   
    $ sudo apt-key add /var/gpudirect-storage-local-repo-*/7fa2af80.pub
-   
    $ sudo apt-get update
-   
    $ sudo apt install nvidia-gds
-   
    $ sudo modprobe nvidia_fs
-   
    $ dpkg -s nvidia-gds
-   
    $ /usr/local/cuda/gds/tools/gdscheck -p
     GDS release version (beta): 0.9.1.5
     nvidia_fs version:  2.4 libcufile version: 2.3
@@ -150,15 +145,16 @@ But it is a little complicated, the followings might be helpful for you.
     GPU index 0 Quadro P400 bar:1 bar size (MiB):256 supports GDS
     IOMMU : disabled
     Platform verification succeeded
-    
+```    
 # 9. Additional software
    $ sudo apt install net-tools 
 
    $ sudo apt install openssh-server
    
    $ sudo update-alternatives --config java
-    There are 2 choices for the alternative java (providing /usr/bin/java).
 ```
+   There are 2 choices for the alternative java (providing /usr/bin/java).
+
      Selection    Path                                            Priority   Status
    ------------------------------------------------------------
      0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
