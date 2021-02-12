@@ -158,13 +158,13 @@ But it is a little complicated, the followings might be helpful for you.
    
    $ sudo update-alternatives --config java
     There are 2 choices for the alternative java (providing /usr/bin/java).
-
+```
      Selection    Path                                            Priority   Status
    ------------------------------------------------------------
      0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
      1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
-   '* 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
-   
+   * 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+```
 
 # 10. Build
    $ nvcc -I /usr/local/cuda/include/  -I /usr/local/cuda/targets/x86_64-linux/lib/ strrev_gds.cu -o strrev_gds.co -L /usr/local/cuda/targets/x86_64-linux/lib/ -lcufile -L /usr/local/cuda/lib64/ -lcuda -L   -Bstatic -L /usr/local/cuda/lib64/ -lcudart_static -lrt -lpthread -ldl -lcrypto -lssl
