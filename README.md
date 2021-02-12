@@ -36,17 +36,22 @@ But it is a little complicated, the followings might be helpful for you.
        -GLOTRENDS M.2 Heatsink ... JPY 650
    ----- Total JPY 49,386 -----
 ```
-# 1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
-
-# 2. Check if the kernel version is 5.4.0-42-generic with "uname -r". If it's true, Update all of softwares (200~400MB). 
-
-# 3. Check iommu status. You should disable it.
+# 1. Install Ubuntu 
+```
+   Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
+```
+# 2. Check if the kernel version
+```
+   Check if the kernel versionis 5.4.0-42-generic with "uname -r". If it's true, Update all of softwares (200~400MB). 
+```
+# 3. Check iommu status
 ```
    $ dmesg | grep -i iommu
    See the release note above URL. You need reboot after making disable iommu.
 ```   
-# 4. Install MOFED5.1 (MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz), but you might need to install "python3-distutils"
+# 4. Install MOFED5.1
 ```
+ Download MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz.
    $ sudo apt-get install python3-distutils
    $ cd MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64/
    $ sudo ./mlnxofedinstall --with-nfsrdma --with-nvmf --enable-gds --add-kernel-support
