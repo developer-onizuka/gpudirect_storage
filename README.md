@@ -58,7 +58,7 @@ But it is a little complicated, the followings might be helpful for you.
    $ sudo update-initramfs -u -k `uname -r`
    $ sudo reboot
 ```
-#5. Install nvidia driver and nvidia cuda tool kit.
+# 5. Install nvidia driver and nvidia cuda tool kit.
 ```
    $ sudo apt update
    $ sudo apt upgrade
