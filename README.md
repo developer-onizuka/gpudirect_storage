@@ -9,22 +9,29 @@ But it is a little complicated, the followings might be helpful for you.
        DIMM slot2: Empty
        HDD 500GB  ---> replace to SATA SSD(Windows10 pro)
        DVD DRIVE  ---> replace to SATA SSD(Ubuntu 20.04)
+       
    (2) SATA SSD  ... JPY 2,000
        Transcend SSD 120GB
        P/N: TS120GSSD220S
+       
    (3) Wifi 11n ... JPY 800
        P/N: WDC-150SU2MWH
+       
    (4) DDR4 DIMM 4GB ... JPY 2,280
        Patriot Memory DDR4 2400MHz PC4-19200
        P/N: PSD44F24082
+       
    (5) NVMe SSD ... JPY 3,980
        KLEVV SSD 256GB CRAS C710 M.2 Type2280 PCIe3x4 NVMe 3D TLC NAND Flash
        P/N: K256GM2SP0-C71
+       
    (6) ETC
        -Sabrent 2.5in->3.5in ... JPY 599
        -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
        -GLOTRENDS M.2 Heatsink ... JPY 650
+       
    (7) NVIDIA Quadro P400 (GP107GL) ... JPY 5,948
+   
    ----- Total JPY 36,406 -----
    
    (8) For Windows10pro
@@ -33,6 +40,7 @@ But it is a little complicated, the followings might be helpful for you.
        -SanDisk 32GB USB3.1 Memory ... JPY 858
        -Transcend SSD 120GB (P/N: TS120GSSD220S) ... JPY 2,500
        -GLOTRENDS M.2 Heatsink ... JPY 650
+       
    ----- Total JPY 49,386 -----
 
 # 1. Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
@@ -155,7 +163,8 @@ But it is a little complicated, the followings might be helpful for you.
    ------------------------------------------------------------
      0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
      1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
-   * 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+   '* 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+   
 
 # 10. Build
    $ nvcc -I /usr/local/cuda/include/  -I /usr/local/cuda/targets/x86_64-linux/lib/ strrev_gds.cu -o strrev_gds.co -L /usr/local/cuda/targets/x86_64-linux/lib/ -lcufile -L /usr/local/cuda/lib64/ -lcuda -L   -Bstatic -L /usr/local/cuda/lib64/ -lcudart_static -lrt -lpthread -ldl -lcrypto -lssl
