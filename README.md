@@ -126,7 +126,9 @@ But it is a little complicated, the followings might be helpful for you.
     
 # 9. Additional software
    $ sudo apt install net-tools 
+
    $ sudo apt install openssh-server
+   
    $ sudo update-alternatives --config java
     There are 2 choices for the alternative java (providing /usr/bin/java).
 
