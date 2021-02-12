@@ -45,14 +45,20 @@ But it is a little complicated, the followings might be helpful for you.
    
 # 4. Install MOFED5.1 (MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64.tgz), but you might need to install "python3-distutils"
    $ sudo apt-get install python3-distutils
+   
    $ cd MLNX_OFED_LINUX-5.1-2.5.8.0-ubuntu20.04-x86_64/
+   
    $ sudo ./mlnxofedinstall --with-nfsrdma --with-nvmf --enable-gds --add-kernel-support
+   
    $ sudo update-initramfs -u -k `uname -r`
+   
    $ sudo reboot
 
 #5. Install nvidia driver and nvidia cuda tool kit.
    $ sudo apt update
+   
    $ sudo apt upgrade
+   
    $ ubuntu-drivers devices
      == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
      modalias : pci:v000010DEd00001CB3sv000010DEsd000011BEbc03sc00i00
@@ -66,6 +72,7 @@ But it is a little complicated, the followings might be helpful for you.
      driver   : xserver-xorg-video-nouveau - distro free builtin
      
    $ sudo apt install nvidia-cuda-toolkit nvidia-driver-460
+   
    $ shutdown -r now
 
 # 6. Check nvidia-smi
@@ -73,20 +80,32 @@ But it is a little complicated, the followings might be helpful for you.
 
 # 7. Install CUDA-11.2
    $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+   
    $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+   
    $ wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda-repo-ubuntu2004-11-2-local_11.2.0-460.27.04-1_amd64.deb
+   
    $ sudo dpkg -i cuda-repo-ubuntu2004-11-2-local_11.2.0-460.27.04-1_amd64.deb
+   
    $ sudo apt-key add /var/cuda-repo-ubuntu2004-11-2-local/7fa2af80.pub
+   
    $ sudo apt-get update
+   
    $ sudo apt-get -y install cuda
 
 # 8. Install GDS
    $ sudo dpkg -i gpudirect-storage-local-repo-ubuntu2004-cuda-11.2-0.9.1_0.9.1-1_amd64.deb 
+   
    $ sudo apt-key add /var/gpudirect-storage-local-repo-*/7fa2af80.pub
+   
    $ sudo apt-get update
+   
    $ sudo apt install nvidia-gds
+   
    $ sudo modprobe nvidia_fs
+   
    $ dpkg -s nvidia-gds
+   
    $ /usr/local/cuda/gds/tools/gdscheck -p
     GDS release version (beta): 0.9.1.5
     nvidia_fs version:  2.4 libcufile version: 2.3
