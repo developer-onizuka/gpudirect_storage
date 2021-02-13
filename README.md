@@ -149,7 +149,20 @@ But it is a little complicated, the followings might be helpful for you.
    * 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
 ```
 
-# 10. Build
+# 10. Build and Run
 ```
    $ nvcc -I /usr/local/cuda/include/  -I /usr/local/cuda/targets/x86_64-linux/lib/ strrev_gds.cu -o strrev_gds.co -L /usr/local/cuda/targets/x86_64-linux/lib/ -lcufile -L /usr/local/cuda/lib64/ -lcuda -L   -Bstatic -L /usr/local/cuda/lib64/ -lcudart_static -lrt -lpthread -ldl -lcrypto -lssl
+   $ echo -n "Hello, GDS World!" > test.txt
+   $ ./strrev_gds.co test.txt 
+   sys_len : 17
+   !dlroW SDG ,olleH
+   See also test.txt
+   $ cat test.txt 
+   !dlroW SDG ,olleH
+   $ ./strrev_gds.co test.txt 
+   sys_len : 17
+   Hello, GDS World!
+   See also test.txt
+   $ cat test.txt 
+   Hello, GDS World!
 ```   

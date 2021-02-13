@@ -11,7 +11,7 @@
 
 #include "cufile.h"
 
-#define INIT_BUFSIZE 4096
+#define KB(x) ((x)*1024L)
 #define TESTFILE "/mnt/test"
 
 __global__ void hello(char *str) {
@@ -19,7 +19,7 @@ __global__ void hello(char *str) {
 	printf("buf: %s\n", str);
 }
 
-__global__ void strrev(char *str) {
+__global__ void strrev(char *str, int *len) {
 	int size = 0;
 	while (str[size] != '\0') {
 		size++;
@@ -33,32 +33,36 @@ __global__ void strrev(char *str) {
 	printf("buf: %s\n", str);
 	printf("size: %d\n", size);
 	*/
+	*len = size;
 }
 
 int main(int argc, char *argv[])
 {
 	int fd;
 	int ret;
+	int *sys_len;
+	int *gpu_len;
 	char *system_buf;
 	char *gpumem_buf;
-	long buf_size = INIT_BUFSIZE;
-	system_buf = (char*)malloc(buf_size);
-	cudaMalloc(&gpumem_buf, buf_size);
+	system_buf = (char*)malloc(KB(4));
+	sys_len = (int*)malloc(KB(1));
+	cudaMalloc(&gpumem_buf, KB(4));
+	cudaMalloc(&gpu_len, KB(1));
         off_t file_offset = 0;
         off_t mem_offset = 0;
 	CUfileDescr_t cf_desc; 
 	CUfileHandle_t cf_handle;
 
 	cuFileDriverOpen();
-	fd = open(argv[1], O_RDWR | O_DIRECT, 0664);
+	fd = open(argv[1], O_RDWR | O_DIRECT);
 
 	cf_desc.handle.fd = fd;
 	cf_desc.type = CU_FILE_HANDLE_TYPE_OPAQUE_FD;
 
 	cuFileHandleRegister(&cf_handle, &cf_desc);
-	cuFileBufRegister((char*)gpumem_buf, buf_size, 0);
+	cuFileBufRegister((char*)gpumem_buf, KB(4), 0);
 
-	ret = cuFileRead(cf_handle, (char*)gpumem_buf, buf_size, file_offset, mem_offset);
+	ret = cuFileRead(cf_handle, (char*)gpumem_buf, KB(4), file_offset, mem_offset);
 	if (ret < 0) {
 		printf("cuFileRead failed : %d", ret); 
 	}
@@ -66,22 +70,25 @@ int main(int argc, char *argv[])
 	/*
 	hello<<<1,1>>>(gpumem_buf);
 	*/
-	strrev<<<1,1>>>(gpumem_buf);
+	strrev<<<1,1>>>(gpumem_buf, gpu_len);
 
-	/*
-	ret = cuFileWrite(cf_handle, (char*)gpumem_buf, buf_size, file_offset, mem_offset);
+	cudaMemcpy(sys_len, gpu_len, KB(1), cudaMemcpyDeviceToHost);
+	printf("sys_len : %d\n", *sys_len); 
+	ret = cuFileWrite(cf_handle, (char*)gpumem_buf, *sys_len, file_offset, mem_offset);
 	if (ret < 0) {
 		printf("cuFileWrite failed : %d", ret); 
 	}
-	*/
 
-	cudaMemcpy(system_buf, gpumem_buf, buf_size, cudaMemcpyDeviceToHost);
-	printf("%s: %s\n", TESTFILE, system_buf);
+	cudaMemcpy(system_buf, gpumem_buf, KB(4), cudaMemcpyDeviceToHost);
+	printf("%s\n", system_buf);
+	printf("See also %s\n", argv[1]);
 
 	cuFileBufDeregister((char*)gpumem_buf);
 
 	cudaFree(gpumem_buf);
+	cudaFree(gpu_len);
 	free(system_buf);
+	free(sys_len);
 
 	close(fd);
 	cuFileDriverClose();
