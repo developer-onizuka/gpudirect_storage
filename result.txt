@@ -146,3 +146,4 @@
     <C-state Disable>
     $ gdsio -f /mnt/test1G -d 0 -n 0 -w 1 -s 1G -x 0 -I 3 -T 10
     IoType: RANDWRITE XferType: GPUD Threads: 1 DataSetSize: 6266880/1048576(KiB) IOSize: 1024(KiB) Throughput: 0.491429 GiB/sec, Avg_Latency: 1987.084967 usecs ops: 6120 total_time 12.161591 secs
+
