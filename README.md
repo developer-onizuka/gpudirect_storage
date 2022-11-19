@@ -4,45 +4,23 @@ But it is a little complicated, the followings might be helpful for you.
 
 # 0. Hardware
 ```
-   (1) Optiplex 3050SFF  ... JPY 19,250
+   (1) Optiplex 3050SFF
        Intel(R) Core(TM) i3-7100 CPU @ 3.90GHz
        DIMM slot1: DDR4 DIMM 4GB (Hynix)
-       DIMM slot2: Empty
-       HDD 500GB  ---> replace to SATA SSD(Windows10 pro)
-       DVD DRIVE  ---> replace to SATA SSD(Ubuntu 20.04)
-   (2) SATA SSD  ... JPY 2,500
+       DIMM slot2: DDR4 DIMM 4GB (Patriot)
+   (2) SATA SSD (for Ubuntu 20.04)
        Transcend SSD 120GB
        P/N: TS120GSSD220S
-   (3) Wifi 11n ... JPY 800
-       P/N: WDC-150SU2MWH
-   (4) DDR4 DIMM 4GB ... JPY 2,280
-       Patriot Memory DDR4 2400MHz PC4-19200
-       P/N: PSD44F24082
-   (5) NVMe SSD ... JPY 3,980
+   (3) NVMe SSD
        KLEVV SSD 256GB CRAS C710 M.2 Type2280 PCIe3x4 NVMe 3D TLC NAND Flash
        P/N: K256GM2SP0-C71
-   (6) ETC
-       -Sabrent 2.5in->3.5in ... JPY 599
-       -Zheino 2nd 9.5mm Note PC drive mounter ... JPY 899
-       -GLOTRENDS M.2 Heatsink ... JPY 650
-   (7) NVIDIA Quadro P400 (GP107GL) ... JPY 5,948
-   ----- Total JPY 36,906 -----
-   
-   (8) For Windows10pro
-       -Crucial SSD P5 500GB M.2 NVMe (P/N: CT500P5SSD8JP) ... JPY 7,973
-       -Xiwai low profile PCI-e3.0 x1 M.2 NGFF M-Key SSD NVMe AHCI PCI Express Adapter Card ... JPY 999
-       -SanDisk 32GB USB3.1 Memory ... JPY 858
-       -Transcend SSD 120GB (P/N: TS120GSSD220S) ... JPY 2,500
-       -GLOTRENDS M.2 Heatsink ... JPY 650
-   ----- Total JPY 49,886 -----
+   (4) NVIDIA Quadro P400 (GP107GL)
 ```
-# 1. Install Ubuntu 
-```
-   Install Ubuntu 20.04 as "Minimal Install" and don't select "install third-party software for graphics and Wi-Fi hardware and additional media formats".
-```
+# 1. Install Ubuntu 20.04
+
 # 2. Check if the kernel version
 ```
-   Check if the kernel versionis 5.4.0-42-generic with "uname -r". If it's true, Update all of softwares (200~400MB). 
+   Check if the kernel versionis 5.4.0-42-generic with "uname -r".
 ```
 # 3. Check iommu status
 ```
@@ -76,11 +54,8 @@ But it is a little complicated, the followings might be helpful for you.
    $ sudo apt install nvidia-cuda-toolkit nvidia-driver-460
    $ shutdown -r now
 ```
-# 6. Check nvidia-smi
-```
-   You might see cuda-11.2 was already installed. But please note cuda is still 10.1 in the step.
-```
-# 7. Install CUDA-11.2
+
+# 6. Install CUDA-11.2
 ```
    $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
    $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -90,7 +65,7 @@ But it is a little complicated, the followings might be helpful for you.
    $ sudo apt-get update
    $ sudo apt-get -y install cuda
 ```
-# 8. Install GDS
+# 7. Install GDS
 ```
    $ sudo dpkg -i gpudirect-storage-local-repo-ubuntu2004-cuda-11.2-0.9.1_0.9.1-1_amd64.deb 
    $ sudo apt-key add /var/gpudirect-storage-local-repo-*/7fa2af80.pub
@@ -179,34 +154,26 @@ The following is K1200's result.
     Platform verification error :
     GPUDirect Storage not supported on current platform
 ```
-# 9. Additional software
-```
-   $ sudo apt install net-tools 
-   $ sudo apt install openssh-server
-   $ sudo update-alternatives --config java
-   There are 2 choices for the alternative java (providing /usr/bin/java).
 
-     Selection    Path                                            Priority   Status
-   ------------------------------------------------------------
-     0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
-     1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
-   * 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
-```
-
-# 10. Build and Run
+# 8. Build and Run
 ```
    $ nvcc -I /usr/local/cuda/include/  -I /usr/local/cuda/targets/x86_64-linux/lib/ strrev_gds.cu -o strrev_gds.co -L /usr/local/cuda/targets/x86_64-linux/lib/ -lcufile -L /usr/local/cuda/lib64/ -lcuda -L   -Bstatic -L /usr/local/cuda/lib64/ -lcudart_static -lrt -lpthread -ldl -lcrypto -lssl
+   
    $ echo -n "Hello, GDS World!" > test.txt
+   
    $ ./strrev_gds.co test.txt 
    sys_len : 17
    !dlroW SDG ,olleH
    See also test.txt
+   
    $ cat test.txt 
    !dlroW SDG ,olleH
+   
    $ ./strrev_gds.co test.txt 
    sys_len : 17
    Hello, GDS World!
    See also test.txt
+   
    $ cat test.txt 
    Hello, GDS World!
 ```   
