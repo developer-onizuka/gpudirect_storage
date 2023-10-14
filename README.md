@@ -1,3 +1,6 @@
+**Before you try this, the link below may help you understand what GPUDirect Storage is:**
+> https://github.com/developer-onizuka/what_is_GPUDirect-Storage
+
 You can install GDS by through the release note below:
 https://docs.nvidia.com/gpudirect-storage/release-notes/index.html
 But it is a little complicated, the followings might be helpful for you.
